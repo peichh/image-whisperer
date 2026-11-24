@@ -29,14 +29,14 @@ Rules:
 
 ## Applying
 
-1. Request-specific instructions win over the profile.
-2. Use `hard_rules` always; use `likes` to fill axes the request leaves open; use `dislikes` as counter-instructions (via `knowledge/anti-generic-aesthetics.md` style wording).
+1. Request-specific instructions win over the whole profile, including `hard_rules`: if the user asks for a conflicting style this time ("ignore my style", "this time neon"), suspend the conflicting rules for this request only and keep the profile unchanged.
+2. Otherwise use `hard_rules` always; use `likes` to fill axes the request leaves open; use `dislikes` as counter-instructions (via `knowledge/anti-generic-aesthetics.md` style wording).
 3. Use `model_notes` for the current target model (e.g. "on Gemini, say 'not a mobile-game illustration' explicitly").
 4. Mention briefly that the profile was applied ("ใช้สไตล์ที่บันทึกไว้: เส้นบาง สีหม่น").
 
 ## Storing (always with permission)
 
-- **Host has persistent memory** (e.g. Gemini app "saved info"/memory, Claude memory, agent memory files): ask "Save this aesthetic profile for future images?" Save only after a yes. Save the compact form (hard rules + top likes/dislikes).
+- **Host has persistent memory** (e.g. Gemini app "saved info"/memory, Claude memory, agent memory files): ask "Save this aesthetic profile for future images?" Save only after a yes. Save the compact form (hard rules + top likes/dislikes), keeping every trait's `scope`: a project-specific trait is saved with its scope tag and applied only to that project.
 - **No persistent memory**: give the profile as a JSON block or file named `image-whisperer-profile.json` and tell the user to paste or upload it next time.
 - Never store images of real people or personal data in the profile; store only visual traits.
 - The user can ask to show, edit, export or delete the profile at any time.
@@ -44,5 +44,7 @@ Rules:
 ## Compact form (for memory or chat)
 
 ```
-Aesthetic profile "<name>": ALWAYS <hard rules>. LIKES line: …; colour: …; light: …; composition: …; texture: …. AVOID <dislikes>. On <model>: <note>.
+Aesthetic profile "<name>": ALWAYS <hard rules>. LIKES line: …; colour: …; light: …; composition: …; texture: …. AVOID <dislikes>. ONLY FOR <scope>: <scoped traits>. On <model>: <note>.
 ```
+
+Traits without a scope apply to all work; traits under `ONLY FOR <scope>` apply only when the request belongs to that scope.
