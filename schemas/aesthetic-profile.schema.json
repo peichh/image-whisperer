@@ -13,7 +13,7 @@
         "axis": {"$ref": "#/$defs/axis"},
         "trait": {"type": "string", "minLength": 3},
         "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
-        "scope": {"type": "string", "description": "limit to a project or image type; omit for all work"},
+        "scope": {"type": "string", "description": "limit to a project (e.g. \"children's book project\") or an image type (e.g. \"portraits\"); omit for all work"},
         "source": {"type": "string"}
       }
     }

@@ -23,7 +23,7 @@ Rules:
 
 1. Record **traits, not names**: "fine tapering lines, muted palette, painted skies" — not "Ghibli". A name may be kept only as a `label` beside the traits.
 2. Keep each trait with its source and a confidence (`low` after one signal, `medium` after two consistent signals, `high` when the user states it as a rule).
-3. Do not generalise from one image to all work: tie project-specific traits to a `scope` (e.g. "children's book project").
+3. Do not generalise from one image to all work: tie narrow traits to a `scope` — a project ("children's book project") or an image type ("portraits").
 4. Conflicts: newer explicit statements beat older inferred ones; ask if two explicit rules conflict.
 5. Show the user the extracted traits in plain language and let them correct before saving.
 
@@ -36,7 +36,7 @@ Rules:
 
 ## Storing (always with permission)
 
-- **Host has persistent memory** (e.g. Gemini app "saved info"/memory, Claude memory, agent memory files): ask "Save this aesthetic profile for future images?" Save only after a yes. Save the compact form (hard rules + top likes/dislikes), keeping every trait's `scope`: a project-specific trait is saved with its scope tag and applied only to that project.
+- **Host has persistent memory** (e.g. Gemini app "saved info"/memory, Claude memory, agent memory files): ask "Save this aesthetic profile for future images?" Save only after a yes. Save the compact form (hard rules + top likes/dislikes), keeping every trait's `scope`: a trait scoped to a project or an image type (e.g. "portraits") is saved with its scope tag and applied only to requests in that project or of that image type.
 - **No persistent memory**: give the profile as a JSON block or file named `image-whisperer-profile.json` and tell the user to paste or upload it next time.
 - Never store images of real people or personal data in the profile; store only visual traits.
 - The user can ask to show, edit, export or delete the profile at any time.
@@ -47,4 +47,4 @@ Rules:
 Aesthetic profile "<name>": ALWAYS <hard rules>. LIKES line: …; colour: …; light: …; composition: …; texture: …. AVOID <dislikes>. ONLY FOR <scope>: <scoped traits>. On <model>: <note>.
 ```
 
-Traits without a scope apply to all work; traits under `ONLY FOR <scope>` apply only when the request belongs to that scope.
+Traits without a scope apply to all work; traits under `ONLY FOR <scope>` apply only when the request belongs to that scope (that project, or that image type in any project).
