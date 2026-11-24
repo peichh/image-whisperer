@@ -25,7 +25,7 @@ FIXTURES = HERE / "style-fidelity" / "rubric-fixtures.jsonl"
 LABEL_SUFFIX = ", premium art style, masterpiece, cinematic, stunning, high quality, trending on artstation"
 LABELS = [r"premium", r"masterpiece", r"cinematic", r"high[- ]quality", r"best quality", r"stunning", r"trending",
           r"ghibli", r"shinkai", r"kyoto animation", r"ufotable", r"pixar", r"disney", r"\baesthetic\b", r"artsy|อาร์ต"]
-NEGATION = re.compile(r"\b(not|no|never|without|rather than|instead of|avoid|less)\b[^.;:—]*", re.I)
+NEGATION = re.compile(r"\b(not|no|never|without|rather than|instead of|avoid|less)\b[^.,;:—]*", re.I)
 
 # Visual verdict thresholds (core/quality-critic.md section E)
 MIN_SEMANTIC, MIN_AESTHETIC, MIN_EXECUTION = 4, 4, 3
@@ -48,8 +48,9 @@ def verdict(semantic: int, aesthetic: int, execution: int) -> str:
 
 
 def positive(text: str) -> str:
-    """Drop negated phrases so 'not glossy' does not count as asking for gloss."""
-    return NEGATION.sub(" ", text)
+    """Drop negated phrases (up to the next comma or sentence break) and Midjourney `--no` lists,
+    so 'not glossy' does not count as asking for gloss."""
+    return NEGATION.sub(" ", re.sub(r"--no\s[^-]*", " ", text))
 
 
 def score(case, prompt, negative=""):

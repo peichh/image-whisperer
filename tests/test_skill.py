@@ -246,6 +246,8 @@ class StyleFidelity(unittest.TestCase):
         c = next(x for x in self.cases if x["id"] == "sf-001")
         self.assertTrue(sf.score(c, c["c_skill"] + " Glossy sparkles everywhere.")["unwanted"])
         self.assertFalse(sf.score(c, c["c_skill"])["unwanted"])  # contains 'not glossy'
+        self.assertTrue(sf.score(c, "The girl at the bus stop in the rain, not glossy or doll-like, with sparkles everywhere.")["unwanted"])
+        self.assertFalse(sf.score(c, "a girl at a bus stop in the rain --ar 16:9 --no sparkles, neon")["unwanted"])
 
     def test_verdict_fixtures(self):
         for line in (ROOT / "benchmarks" / "style-fidelity" / "rubric-fixtures.jsonl").read_text(encoding="utf-8").splitlines():
