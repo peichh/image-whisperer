@@ -42,16 +42,16 @@ Not added: studio light, model looks, "cinematic", "8K". More in [`examples/`](e
 
 ## Benchmark (prompt-level only)
 
-111 cases (56 Thai, 55 English) across 31 categories and 8 target models, comparing the raw request (A), a typical quality-tag enhancer (B) and this skill (C). Full report: [`benchmarks/REPORT.md`](benchmarks/REPORT.md).
+112 cases (57 Thai, 55 English) across 31 categories and 8 target models, comparing the raw request (A), a typical quality-tag enhancer (B) and this skill (C). Full report: [`benchmarks/REPORT.md`](benchmarks/REPORT.md).
 
 | Metric | A raw | B conventional | C Image Whisperer |
 |---|---|---|---|
-| Intent preservation | 89.6% | 89.9% | 100.0% |
+| Intent preservation | 89.7% | 90.0% | 100.0% |
 | Unrequested additions per prompt | 0.00 | 8.07 | 0.00 |
-| Scene specificity | 16.7% | 56.5% | 83.3% |
-| Model compatibility | 27.9% | 82.0% | 100.0% |
+| Scene specificity | 16.5% | 56.5% | 83.5% |
+| Model compatibility | 28.6% | 82.1% | 100.0% |
 
-A second set of 24 style-fidelity cases checks that the look is described in visible terms: a content-only prompt (S) covers 4% of the defining style axes and fails every case, label stacking (B) relies on style labels alone in 88% of cases, and the skill (C) covers 100% of the axes and passes every case. Report: [`benchmarks/style-fidelity/REPORT.md`](benchmarks/style-fidelity/REPORT.md).
+A second set of 25 style-fidelity cases checks that the look is described in visible terms: a content-only prompt (S) covers 4% of the defining style axes and fails every case, label stacking (B) relies on style labels alone in 88% of cases, and the skill (C) covers 100% of the axes and passes every case. Report: [`benchmarks/style-fidelity/REPORT.md`](benchmarks/style-fidelity/REPORT.md).
 
 **No images were generated.** These are lexical checks on prompt text, written by the same project as the skill prompts. They are a regression baseline, not proof of better images. See [`benchmarks/README.md`](benchmarks/README.md) and [`docs/limitations.md`](docs/limitations.md).
 

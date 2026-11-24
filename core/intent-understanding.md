@@ -41,6 +41,22 @@ If `purpose` is missing, infer it from context (platform words, tone). If it is 
 - **Photo story**: decide who is taking the picture and why, because it sets distance, gaze and mood. A beach photo "on iPhone" is most likely taken by a friend or partner on holiday → candid moment, a few metres away, chest-to-eye height, relaxed and flattering. A selfie → arm's length, front camera. A stranger's street shot → farther, unaware subject.
 - **Moment**: give the person something to do and somewhere to look (walking along the water, laughing, pushing hair back, glancing at the sea). A stiff "standing, facing the camera, arms down" pose reads as a record shot; use it only for ID-style, product-fit or when asked.
 
+## 3c. Emotion words → visible face, pose and camera
+
+Translate mood words (often Thai) into what can be seen; a single adjective is usually rendered as a generic expression.
+
+| Word | Face | Body / camera |
+|---|---|---|
+| หยิ่ง, haughty, arrogant | chin raised, looking down the nose, half-lidded eyes, faint smug smirk | weight on one leg, relaxed shoulders; low camera angle so the subject looks down at the viewer |
+| ดุ, fierce, angry | brows pulled down, eyes wide and fixed, jaw tight | forward lean, fists or weapon ready; eye-level or slightly low |
+| เย็นชา, cold | neutral mouth, steady unblinking gaze, no smile | still, upright; eye-level, more distance |
+| มั่นใจ, confident | small closed-mouth smile, direct gaze | open stance, hand on hip; slightly low angle |
+| ขี้เล่น, playful | lopsided grin, one eyebrow up, wink | mid-movement, tilted head |
+| เขิน, shy | eyes down or to the side, small smile, blush | shoulders in, hand near face; slightly high angle |
+| เศร้า, sad | brows raised in the middle, mouth corners down, wet eyes | head lowered; high angle, more empty space |
+
+Keep the user's exact word in mind: "หยิ่ง" is not "ดุ". If two readings are possible, pick the one closest to the word and list it under "Assumed".
+
 ## 4. Do not over-interpret
 
 Bad habits to avoid:
