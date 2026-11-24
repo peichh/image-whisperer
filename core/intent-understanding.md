@@ -48,12 +48,14 @@ Translate mood words (often Thai) into what can be seen; a single adjective is u
 | Word | Face | Body / camera |
 |---|---|---|
 | หยิ่ง, haughty, arrogant | chin raised, looking down the nose, half-lidded eyes, faint smug smirk | weight on one leg, relaxed shoulders; low camera angle so the subject looks down at the viewer |
-| ดุ, fierce, angry | brows pulled down, eyes wide and fixed, jaw tight | forward lean, fists or weapon ready; eye-level or slightly low |
+| ดุ, fierce, angry | brows pulled down, eyes wide and fixed, jaw tight | forward lean, tense shoulders; eye-level or slightly low |
 | เย็นชา, cold | neutral mouth, steady unblinking gaze, no smile | still, upright; eye-level, more distance |
 | มั่นใจ, confident | small closed-mouth smile, direct gaze | open stance, hand on hip; slightly low angle |
 | ขี้เล่น, playful | lopsided grin, one eyebrow up, wink | mid-movement, tilted head |
 | เขิน, shy | eyes down or to the side, small smile, blush | shoulders in, hand near face; slightly high angle |
 | เศร้า, sad | brows raised in the middle, mouth corners down, wet eyes | head lowered; high angle, more empty space |
+
+Use the body/camera column only when the framing shows the body; for a face or portrait request change only the face. Never add props or actions (weapons, fists, a fight) the user did not ask for.
 
 Keep the user's exact word in mind: "หยิ่ง" is not "ดุ". If two readings are possible, pick the one closest to the word and list it under "Assumed".
 
