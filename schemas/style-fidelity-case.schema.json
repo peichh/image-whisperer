@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/peichh/image-whisperer/schemas/style-fidelity-case.schema.json",
+  "title": "Image Whisperer style fidelity case",
+  "type": "object",
+  "required": ["id", "lang", "kind", "target", "request", "keep", "axes", "avoid", "s_semantic", "c_skill"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^sf-[0-9]{3}$"},
+    "lang": {"enum": ["th", "en"]},
+    "kind": {"enum": ["translate", "intentional_generic", "profile", "cross_model"]},
+    "target": {"enum": ["gemini", "flux", "midjourney", "sdxl", "qwen-image", "z-image", "seedream", "universal"]},
+    "request": {"type": "string"},
+    "keep": {"type": "array", "items": {"type": "string"}, "minItems": 1, "description": "semantic regexes"},
+    "axes": {"type": "object", "minProperties": 3, "propertyNames": {"enum": ["line", "shape_language", "anatomy", "face", "shading", "color", "lighting", "materials", "composition", "perspective", "atmosphere", "density", "motion", "texture", "imperfection", "emotion"]}, "additionalProperties": {"type": "string"}, "description": "defining style axis -> regex for its visible trait"},
+    "avoid": {"type": "array", "items": {"type": "string"}, "description": "regexes for unwanted generic traits; negated phrases are ignored"},
+    "s_semantic": {"type": "string"},
+    "c_skill": {"type": "string"},
+    "c_negative": {"type": "string"},
+    "profile": {"type": "string"},
+    "notes": {"type": "string"}
+  }
+}

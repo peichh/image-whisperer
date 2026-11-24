@@ -2,7 +2,7 @@
 
 ## What is measured
 
-`cases.jsonl` holds 110 prompt-level cases (Thai and English) across 31 categories and all 8 adapters: vague and detailed requests, people, groups, complex poses, smartphone looks, anime and other styles, products, architecture, graphics with text, edits, references, conversational revisions, optimisation, critique and cross-model comparison. Schema: `schemas/benchmark-case.schema.json`.
+`cases.jsonl` holds 114 prompt-level cases (Thai and English) across 31 categories and all 8 adapters: vague and detailed requests, people, groups, complex poses, smartphone looks, anime and other styles, products, architecture, graphics with text, edits, references, conversational revisions, optimisation, critique and cross-model comparison. Schema: `schemas/benchmark-case.schema.json`.
 
 Each case compares three prompts:
 
@@ -18,6 +18,7 @@ Metrics (`run.py`, no dependencies):
 | Unrequested additions | count of `must_not_add` regexes and generic style-push words found that were not in the request |
 | Specificity | share of 4 scene slots (setting, light, composition, medium) mentioned |
 | Model compatibility | adapter lint: no foreign syntax (`--ar` outside Midjourney, `(x:1.2)` outside SD, `::` on V7+), no negative prompt for models without one, word count inside the adapter's band |
+| Skill checks | optional `skill_checks` regexes for behaviour the user did not state (a person's moment, camera height); must pass for C, not counted as intent |
 | Context awareness | intent preservation on revision cases that carry earlier-turn context |
 | Efficiency | mean words (reported, not scored) |
 

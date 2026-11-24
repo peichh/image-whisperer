@@ -1,0 +1,7 @@
+{"id": "fx-01", "note": "everything present, wrong style (generic game look for a film-look request)", "semantic": 5, "aesthetic": 2, "execution": 4, "expected": "content_correct_style_off"}
+{"id": "fx-02", "note": "all three good", "semantic": 5, "aesthetic": 5, "execution": 4, "expected": "success"}
+{"id": "fx-03", "note": "right style, missing a requested object", "semantic": 2, "aesthetic": 5, "execution": 4, "expected": "style_correct_content_off"}
+{"id": "fx-04", "note": "content and style right, sloppy execution", "semantic": 4, "aesthetic": 4, "execution": 2, "expected": "weak_execution"}
+{"id": "fx-05", "note": "threshold: aesthetic 3 is not enough even with perfect content", "semantic": 5, "aesthetic": 3, "execution": 5, "expected": "content_correct_style_off"}
+{"id": "fx-06", "note": "minimum passing scores", "semantic": 4, "aesthetic": 4, "execution": 3, "expected": "success"}
+{"id": "fx-07", "note": "everything weak", "semantic": 2, "aesthetic": 2, "execution": 2, "expected": "fail"}

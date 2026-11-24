@@ -21,7 +21,7 @@ CONVENTIONAL_SUFFIX = (", masterpiece, best quality, ultra detailed, 8k, hyperre
 # Words that push style without being asked (counted only if absent from the request).
 BLOAT = [r"masterpiece", r"best quality", r"ultra[- ]?detailed", r"\b8k\b", r"\b4k\b", r"hyper-?realistic",
          r"award[- ]winning", r"trending on artstation", r"cinematic", r"breathtaking", r"stunning",
-         r"flawless", r"perfect (skin|face)", r"octane render", r"unreal engine"]
+         r"flawless", r"perfect (skin|face)", r"\bordinary\b", r"average-looking", r"octane render", r"unreal engine"]
 
 SLOTS = {
     "setting": r"\b(in|at|on|inside|outside|by|beside|street|room|kitchen|beach|market|shop|house|office|background|studio|city|park|temple|forest|table|garden|road|cafe|café|field|sky)\b",
@@ -81,6 +81,7 @@ def score(case, arm, prompt, negative=""):
     added = [b for b in case["must_not_add"] + BLOAT if re.search(b, text, re.I) and not re.search(b, req, re.I)]
     slots = sum(1 for r in SLOTS.values() if re.search(r, text, re.I))
     violations = lint(case["target"], prompt, negative, case["mode"])
+    skill_missing = [k for k in case.get("skill_checks", []) if not re.search(k, text, re.I)]
     return {
         "intent": kept / len(keep) if keep else 1.0,
         "assumptions": len(added),
@@ -89,6 +90,7 @@ def score(case, arm, prompt, negative=""):
         "compat": 0 if violations else 1,
         "violations": violations,
         "words": words(strip_params(prompt)),
+        "skill_missing": skill_missing,
     }
 
 
@@ -144,12 +146,12 @@ def report(rows):
             L.append(f"| {k} | {len(rs)} | " + "/".join(f"{agg(rs,a,'intent')*100:.0f}" for a in "ABC") + " | "
                      + "/".join(f"{agg(rs,a,'assumptions'):.1f}" for a in "ABC") + " | "
                      + "/".join(f"{agg(rs,a,'compat')*100:.0f}" for a in "ABC") + " |")
-    fails = [r for r in rows if r["C"]["intent"] < 1 or r["C"]["assumptions"] or not r["C"]["compat"]]
+    fails = [r for r in rows if r["C"]["intent"] < 1 or r["C"]["assumptions"] or not r["C"]["compat"] or r["C"]["skill_missing"]]
     L += ["", "## C cases with any failure", ""]
     if not fails:
         L.append("None.")
     for r in fails:
-        L.append(f"- `{r['id']}`: intent {r['C']['intent']*100:.0f}%, added {r['C']['added']}, violations {r['C']['violations']}")
+        L.append(f"- `{r['id']}`: intent {r['C']['intent']*100:.0f}%, added {r['C']['added']}, violations {r['C']['violations']}, skill checks missing {r['C']['skill_missing']}")
     L += ["", "## Reading these numbers", "",
           "- A (raw) often scores high on intent because it *is* the request; it loses on specificity and compatibility.",
           "- B shows the cost of generic enhancement: unrequested style words and lint failures, with no added scene information.",

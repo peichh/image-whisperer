@@ -7,4 +7,6 @@
 - **Time-sensitive facts.** Model names, reference-image limits, parameters and app features were checked on 2026-11-24 and will change.
 - **Host behaviour varies.** Whether a host loads extra files, can see images, or can generate images inside a skill depends on the host (e.g. the Gemini app skills page lists tools that do not work in skills yet).
 - **Unverified areas**: Seedream 5.x prompt differences; Midjourney text rendering quality; live Gemini API path in `integrations/gemini-api/whisper.py` (only the dry run is tested).
+- **Style ceilings.** Describing a look precisely does not guarantee a model can render it; some models may keep a house style. Style differences between Gemini and ChatGPT Images reported by the owner are user observations, not measured by us.
+- **Aesthetic profiles** are only as good as the feedback given; one liked image is weak evidence (stored as low confidence).
 - **Safety** is the host model's job; the skill adds basic rules (no sexualised minors, respect for real people) but is not a safety filter.

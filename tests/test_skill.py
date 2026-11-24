@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "benchmarks"))
 sys.path.insert(0, str(ROOT / "scripts"))
 import run as bench  # noqa: E402
 import build_dist  # noqa: E402
+import style_fidelity as sf  # noqa: E402
 
 
 def frontmatter(text):
@@ -79,7 +80,7 @@ class Modules(unittest.TestCase):
     def test_adapters_have_sections(self):
         for name in ("gemini", "flux", "midjourney", "sdxl", "qwen-image", "z-image", "seedream", "universal"):
             t = (ROOT / "adapters" / f"{name}.md").read_text(encoding="utf-8")
-            for sec in ("## Prompt form", "## Rules", "## Editing", "## Example"):
+            for sec in ("## Prompt form", "## Rules", "## Aesthetic translation", "## Editing", "## Example"):
                 self.assertIn(sec, t, f"{name}: {sec}")
             self.assertIn(name, bench.BANDS)
 
@@ -143,17 +144,173 @@ class Benchmark(unittest.TestCase):
 
     def test_skill_arm_has_no_regressions(self):
         rows = bench.run()
-        bad = [(r["id"], r["C"]) for r in rows if r["C"]["intent"] < 1 or r["C"]["assumptions"] or not r["C"]["compat"]]
+        bad = [(r["id"], r["C"]) for r in rows if r["C"]["intent"] < 1 or r["C"]["assumptions"] or not r["C"]["compat"] or r["C"]["skill_missing"]]
         self.assertEqual(bad, [])
 
     def test_report_is_current(self):
         self.assertEqual((ROOT / "benchmarks" / "REPORT.md").read_text(encoding="utf-8"), bench.report(bench.run()))
+
+    def test_old_anime_assassin_prompt_fails(self):
+        """Real regression (iw-112): prompt that produced Western-comic style, a scowl and an unrequested neon city on Gemini."""
+        case = next(c for c in self.cases if c["id"] == "iw-112")
+        old = (
+            "An anime character illustration of a young woman with shoulder-length black hair, a cold, haughty expression, and a diagonal scar across her left cheek. "
+            "She wears a fitted cropped black leather jacket, low-slung leather utility belts with pouches and a sheathed dagger, black leather short shorts, dark thigh straps, fingerless gloves and a forearm guard. "
+            "Three-quarter standing shot on a wet concrete rooftop at night in the rain, facing forward with blurred cyan and pink neon signs. "
+            "The style: crisp dark ink line art, cel-shaded coloring, expressive anime eyes."
+        )
+        r = bench.score(case, "C", old)
+        self.assertTrue(r["skill_missing"])
+        self.assertTrue(r["added"])
+
+    def test_selfie_without_phone_hand_fails(self):
+        """Real regression (iw-113): both hands posed in a selfie, none holding the phone."""
+        case = next(c for c in self.cases if c["id"] == "iw-113")
+        old = (
+            "Vertical 3:4 candid smartphone selfie of a Thai female student in a classroom, raising her right hand in a peace sign "
+            "and resting her left arm on a wooden desk, shot at arm's length on a phone front camera."
+        )
+        self.assertTrue(bench.score(case, "C", old)["skill_missing"])
+
+    def test_old_wide_staged_selfie_prompt_fails(self):
+        """Real regression (iw-114): wide selfie with a detailed set read as staged next to ChatGPT's close selfie."""
+        case = next(c for c in self.cases if c["id"] == "iw-114")
+        old = (
+            "Vertical 3:4 candid smartphone selfie of a young Thai woman, around 19, in a Thai student uniform inside a classroom. "
+            "Leaning slightly forward toward the front camera with a bright, genuine open-mouthed smile, she raises her right hand in a two-finger peace sign "
+            "with her index finger lightly poking her right cheek, resting her left arm on a wooden desk. Behind her are scuffed off-white classroom lockers "
+            "with peeled pink sticker residue and high rectangular glass windows. Shot at arm's length on a phone front camera with natural phone HDR."
+        )
+        self.assertTrue(bench.score(case, "C", old)["skill_missing"])
+
+    def test_old_plain_record_shot_prompt_fails(self):
+        """Real regression (iw-111): prompt that produced a stiff, plain beach photo on Gemini."""
+        case = next(c for c in self.cases if c["id"] == "iw-111")
+        old = ("A candid smartphone photo of an ordinary Thai man in his late 20s standing on a sandy beach in the late afternoon. "
+               "He has short messy black hair, natural skin texture and a relaxed smile as he looks toward the camera. "
+               "Shot at eye level on an iPhone's wide main camera with a slight casual tilt, off-centre framing.")
+        r = bench.score(case, "C", old)
+        self.assertEqual(r["intent"], 1.0)  # every user-stated detail is there
+        self.assertTrue(r["skill_missing"])  # but no moment, framing or camera height
+        self.assertIn(r"\bordinary\b", r["added"])
 
     def test_lint_catches_known_errors(self):
         self.assertTrue(bench.lint("gemini", "a cat on a mat in soft light, photo --ar 16:9 " + "word " * 30, ""))
         self.assertTrue(bench.lint("flux", "a cat " * 20, "blurry"))
         self.assertTrue(bench.lint("midjourney", "a cat :: 2 dog --v 8", ""))
         self.assertFalse(bench.lint("midjourney", "a grey cat asleep on a sunny windowsill --ar 3:2 --raw", ""))
+
+
+AXES = ["line", "shape_language", "anatomy", "face", "shading", "color", "lighting", "materials", "composition",
+        "perspective", "atmosphere", "density", "motion", "texture", "imperfection", "emotion"]
+
+
+class AestheticEngine(unittest.TestCase):
+    def test_modules_routed_from_skill(self):
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        for f in ("core/aesthetic-translation.md", "knowledge/anti-generic-aesthetics.md", "core/aesthetic-profile.md"):
+            self.assertIn(f"`{f}`", skill)
+        self.assertIn("PROFILE", skill)
+
+    def test_sixteen_axes_documented(self):
+        t = (ROOT / "core" / "aesthetic-translation.md").read_text(encoding="utf-8").lower()
+        for words in ("line", "shape language", "anatomical stylisation", "facial design", "shading", "colour grading",
+                      "lighting behaviour", "material rendering", "compositional hierarchy", "perspective",
+                      "atmospheric depth", "visual density", "motion representation", "texture treatment",
+                      "artistic imperfection", "emotional expression"):
+            self.assertIn(words, t)
+        schema = json.loads((ROOT / "schemas" / "aesthetic-profile.schema.json").read_text(encoding="utf-8"))
+        self.assertEqual(schema["$defs"]["axis"]["enum"], AXES)
+
+    def test_generic_traits_covered(self):
+        t = (ROOT / "knowledge" / "anti-generic-aesthetics.md").read_text(encoding="utf-8").lower()
+        for trait in ("generic anime face", "repetitive character design", "mobile-game", "thick outlines", "flat lighting",
+                      "artificial poses", "neon saturation", "symmetric composition", "artificial expressions",
+                      "unmotivated visual effects", "over-polished"):
+            self.assertIn(trait, t)
+        self.assertIn("never remove a trait the user asked for", t)
+
+    def test_profile_example_matches_schema(self):
+        schema = json.loads((ROOT / "schemas" / "aesthetic-profile.schema.json").read_text(encoding="utf-8"))
+        p = json.loads((ROOT / "examples" / "aesthetic-profile.example.json").read_text(encoding="utf-8"))
+        for k in schema["required"]:
+            self.assertIn(k, p)
+        for k in p:
+            self.assertIn(k, schema["properties"])
+        trait_keys = set(schema["$defs"]["trait"]["properties"])
+        for t in p["likes"] + p["dislikes"]:
+            self.assertIn(t["axis"], AXES)
+            self.assertLessEqual(set(t), trait_keys)
+        self.assertTrue(p["consent"]["user_approved"])
+
+    def test_critic_has_three_axis_rule(self):
+        t = (ROOT / "core" / "quality-critic.md").read_text(encoding="utf-8")
+        for w in ("Semantic accuracy", "Aesthetic fidelity", "Artistic execution", "never an automatic success"):
+            self.assertIn(w, t)
+
+
+class StyleFidelity(unittest.TestCase):
+    def setUp(self):
+        self.cases = sf.load()
+        self.rows = sf.run()
+        self.schema = json.loads((ROOT / "schemas" / "style-fidelity-case.schema.json").read_text(encoding="utf-8"))
+
+    def test_cases_schema_and_coverage(self):
+        self.assertGreaterEqual(len(self.cases), 20)
+        self.assertEqual({c["kind"] for c in self.cases}, set(self.schema["properties"]["kind"]["enum"]))
+        self.assertEqual({c["lang"] for c in self.cases}, {"th", "en"})
+        for c in self.cases:
+            for k in self.schema["required"]:
+                self.assertIn(k, c, c["id"])
+            for k in c:
+                self.assertIn(k, self.schema["properties"], c["id"])
+            self.assertLessEqual(set(c["axes"]), set(AXES), c["id"])
+            if "profile" in c:
+                self.assertTrue((ROOT / c["profile"]).exists())
+
+    def test_skill_prompts_pass(self):
+        self.assertEqual([(r["id"], r["C"]) for r in self.rows if not r["C"]["pass"]], [])
+
+    def test_content_only_prompts_never_pass(self):
+        """Right content, no style description: must fail (semantic-only arm)."""
+        for r in self.rows:
+            self.assertEqual(r["S"]["semantic"], 1.0, r["id"])
+            self.assertFalse(r["S"]["pass"], r["id"])
+
+    def test_label_stacking_never_passes(self):
+        for r in self.rows:
+            self.assertFalse(r["B"]["pass"], r["id"])
+
+    def test_intentional_generic_is_kept(self):
+        for c in self.cases:
+            if c["kind"] == "intentional_generic":
+                self.assertNotRegex(c["c_skill"], r"rather than a (mobile|game)", c["id"])
+
+    def test_unwanted_traits_detected_but_negations_ignored(self):
+        c = next(x for x in self.cases if x["id"] == "sf-001")
+        self.assertTrue(sf.score(c, c["c_skill"] + " Glossy sparkles everywhere.")["unwanted"])
+        self.assertFalse(sf.score(c, c["c_skill"])["unwanted"])  # contains 'not glossy'
+        self.assertTrue(sf.score(c, "The girl at the bus stop in the rain, not glossy or doll-like, with sparkles everywhere.")["unwanted"])
+        self.assertFalse(sf.score(c, "a girl at a bus stop in the rain --ar 16:9 --no sparkles, neon")["unwanted"])
+        self.assertFalse(sf.score(c, "a girl at a bus stop in the rain --no lens-flare, sparkles, neon --ar 16:9")["unwanted"])
+
+    def test_negated_traits_earn_no_axis_credit(self):
+        c = next(x for x in self.cases if x["id"] == "sf-010")
+        full = sf.score(c, c["c_skill"])
+        self.assertEqual(full["axis_coverage"], 1.0)
+        removed = sf.score(c, c["c_skill"].replace("thick bold outlines", "no outlines"))
+        self.assertIn("line", removed["missing_axes"])
+
+    def test_verdict_fixtures(self):
+        for line in (ROOT / "benchmarks" / "style-fidelity" / "rubric-fixtures.jsonl").read_text(encoding="utf-8").splitlines():
+            f = json.loads(line)
+            self.assertEqual(sf.verdict(f["semantic"], f["aesthetic"], f["execution"]), f["expected"], f["id"])
+        self.assertNotEqual(sf.verdict(5, 1, 5), "success")
+        with self.assertRaises(ValueError):
+            sf.verdict(6, 4, 4)
+
+    def test_report_is_current(self):
+        self.assertEqual((ROOT / "benchmarks" / "style-fidelity" / "REPORT.md").read_text(encoding="utf-8"), sf.report(self.rows))
 
 
 class Distribution(unittest.TestCase):

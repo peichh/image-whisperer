@@ -48,6 +48,16 @@ Google's own photoreal pattern: "A photorealistic [shot type] of [subject] in [s
 - Thai script: keep to a few words; specify "Thai script"; check results; offer a blank area as a fallback.
 - Infographics: list sections with exact labels and numbers; Gemini 3 Pro Image is the strongest Gemini option for dense text.
 
+## Aesthetic translation
+
+- [V] Google's guidance for stylised images: "Describe the artistic style, subject, and medium. Be specific about the visual detail (bold lines, colors, etc.)". Template: "A [style] of a [subject] doing [activity]. The design features [visual qualities] and [color/background preference]."
+- [I, user-reported] Gemini can match every object but render "premium" anime or illustration requests as generic AI illustration or mobile-game artwork. Counter it by naming the visible traits (`core/aesthetic-translation.md`) and, when that look is a risk, one contrast phrase: "a theatrical anime film look rather than a mobile-game illustration".
+- Put one sentence starting "The style:" after the scene with the 4-6 defining traits (line, shading, palette, light, texture, composition). Replace style labels; do not add them on top.
+- Strongest control: style reference images. Gemini 3 Pro Image takes up to 3 style references; say what to take from them ("use only the line work and colour palette of the style images").
+- [I, owner-observed] Plain "anime" requests can come out as Western comic art; use the anime contrast phrase in `styles/anime.md`.
+- [I, owner-observed] Character genres pull default settings ("assassin" → neon cyberpunk city in rain). If the user gave no setting, choose a quiet setting that supports the character and list it under "Assumed".
+- In multi-turn edits, fix style one axis at a time: "Keep everything the same, but make the shading flat two-tone instead of glossy gradients."
+
 ## Editing (conversational)
 
 - Upload/attach the image and say: "Using the provided image, change … to …. Keep … exactly the same."

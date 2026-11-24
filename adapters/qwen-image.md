@@ -17,6 +17,11 @@ Qwen-Image's strengths per its docs: complex text rendering (especially Chinese,
 3. Use no weight syntax.
 4. Aspect ratio/resolution: pipeline settings (`width`, `height`), not in the prompt.
 
+## Aesthetic translation
+
+- Detailed narrative works: add a "The style:" sentence with the defining traits after the scene.
+- For an exact look use Qwen-Image-Edit with a style reference image and say what to take from it (palette, line, texture) and what not (subject).
+
 ## Editing (Qwen-Image-Edit)
 
 - Instruction form: "Change the sign text to "ร้านป้าแดง", keep the font style, colour and everything else unchanged."

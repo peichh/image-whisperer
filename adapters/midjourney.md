@@ -38,6 +38,12 @@ Shape:
 3. Text in images: possible on recent versions but less reliable for long or non-Latin text; quote short text; warn about Thai text.
 4. Artist names: avoid living artists; describe the traits instead.
 
+## Aesthetic translation
+
+- Midjourney applies a strong house aesthetic. To follow a described style closely: `--raw`, a lower `--s` (stylize, 0-1000, default 100), and `--sref` with a reference image or code; `--sw` sets its strength.
+- Use 4-8 short, concrete style phrases ("fine ink lines, flat muted colours, paper grain") instead of "masterpiece, premium".
+- `--no` can remove a specific generic element the user dislikes (`--no sparkles, lens flare`).
+
 ## Editing
 
 V8.x replaces Omni Reference / Character Reference with the **Edit Model**: up to 4 reference images, instruction-style prompts ("Change the jacket to red leather, keep the person and background the same"). On Discord: `--edit <image urls>`. In the web editor use the Edit tools and write the instruction as the prompt.

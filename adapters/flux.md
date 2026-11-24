@@ -37,6 +37,15 @@ When the user wants exact control (layout, many elements, brand colours), FLUX.2
 
 FLUX 3 also accepts an optional element table with bounding boxes `[top, left, bottom, right]` on a 0-1000 grid for precise placement. Use only when the user needs exact layout.
 
+## Aesthetic translation
+
+- Word order matters: put the medium early ("A gouache illustration of …") and the defining traits right after the subject, before minor scene details.
+- FLUX 3 expands short prompts itself; if the style matters, state the key traits explicitly so the expansion does not fall back to a default look.
+- FLUX.2 [klein]: end with `Style: <traits>. Mood: <mood>.` using concrete traits, not labels.
+- Hex colours tied to objects pin a palette precisely (FLUX.2/3).
+- No negative prompt: write generic-trait fixes as the wanted look ("matte flat colour fills, light only from the window").
+- Use reference images ("in the style of image 2: its brush texture and palette") for exact styles.
+
 ## Editing
 
 - FLUX 3: reference images by position — "image 1", "image 2" (up to 10 references). Edit template from the docs: "Modify image 1 by replacing … with …. Keep the rest of the image exactly unchanged, preserving …."
