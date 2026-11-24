@@ -150,6 +150,16 @@ class Benchmark(unittest.TestCase):
     def test_report_is_current(self):
         self.assertEqual((ROOT / "benchmarks" / "REPORT.md").read_text(encoding="utf-8"), bench.report(bench.run()))
 
+    def test_old_plain_record_shot_prompt_fails(self):
+        """Real regression (iw-111): prompt that produced a stiff, plain beach photo on Gemini."""
+        case = next(c for c in self.cases if c["id"] == "iw-111")
+        old = ("A candid smartphone photo of an ordinary Thai man in his late 20s standing on a sandy beach in the late afternoon. "
+               "He has short messy black hair, natural skin texture and a relaxed smile as he looks toward the camera. "
+               "Shot at eye level on an iPhone's wide main camera with a slight casual tilt, off-centre framing.")
+        r = bench.score(case, "C", old)
+        self.assertLess(r["intent"], 1.0)
+        self.assertIn(r"\bordinary\b", r["added"])
+
     def test_lint_catches_known_errors(self):
         self.assertTrue(bench.lint("gemini", "a cat on a mat in soft light, photo --ar 16:9 " + "word " * 30, ""))
         self.assertTrue(bench.lint("flux", "a cat " * 20, "blurry"))

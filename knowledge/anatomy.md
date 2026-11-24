@@ -26,6 +26,7 @@ Use only what the image needs. Realistic styles need more care; stylised styles 
 - Weight: name which leg carries weight, or the support (leaning on a wall, sitting on a step).
 - Balance: the centre of mass sits over the support. Dynamic poses need a reason (running, jumping, dancing).
 - Multiple people: give each person a position and an action. Avoid identical poses and faces unless intended ("twins").
+- Camera height changes proportions: close and above = big head, short legs; chest height from a few metres = natural; hip height = taller, more heroic.
 - Respect body diversity: keep the body type the user describes or implies; do not slim or idealise by default.
 
 ## Skin and hair (realistic)

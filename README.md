@@ -42,14 +42,14 @@ Not added: studio light, model looks, "cinematic", "8K". More in [`examples/`](e
 
 ## Benchmark (prompt-level only)
 
-110 cases (55 Thai, 55 English) across 31 categories and 8 target models, comparing the raw request (A), a typical quality-tag enhancer (B) and this skill (C). Full report: [`benchmarks/REPORT.md`](benchmarks/REPORT.md).
+111 cases (56 Thai, 55 English) across 31 categories and 8 target models, comparing the raw request (A), a typical quality-tag enhancer (B) and this skill (C). Full report: [`benchmarks/REPORT.md`](benchmarks/REPORT.md).
 
 | Metric | A raw | B conventional | C Image Whisperer |
 |---|---|---|---|
-| Intent preservation | 89.5% | 89.8% | 100.0% |
+| Intent preservation | 89.2% | 89.5% | 100.0% |
 | Unrequested additions per prompt | 0.00 | 8.07 | 0.00 |
-| Scene specificity | 16.8% | 56.6% | 83.2% |
-| Model compatibility | 28.2% | 81.8% | 100.0% |
+| Scene specificity | 16.7% | 56.5% | 83.3% |
+| Model compatibility | 27.9% | 82.0% | 100.0% |
 
 A second set of 24 style-fidelity cases checks that the look is described in visible terms: a content-only prompt (S) covers 4% of the defining style axes and fails every case, label stacking (B) relies on style labels alone in 88% of cases, and the skill (C) covers 100% of the axes and passes every case. Report: [`benchmarks/style-fidelity/REPORT.md`](benchmarks/style-fidelity/REPORT.md).
 

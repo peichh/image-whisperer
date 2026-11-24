@@ -34,11 +34,19 @@ If `purpose` is missing, infer it from context (platform words, tone). If it is 
 - Brand or real person names → respect host policy; describe look rather than copying a protected design when needed.
 - Age words: always keep people who are minors in non-sexual, age-appropriate contexts.
 
+## 3b. People: described vs undescribed, and the photo story
+
+- **Real or described person** ("my dad, 58", a reference photo, "a chubby guy"): keep exactly that look — age, body, face, skin. No idealising.
+- **Undescribed person** ("an Asian man at the beach"): choose a natural, pleasant-looking real person — the way a photo of a friend looks on a good day. Do not idealise (model face, six-pack, glamour) and do not push the other way (never add "ordinary", "average-looking", "plain"). Pick age and nationality from context (Thai request → Thai person is a fair default) and list them under "Assumed".
+- **Photo story**: decide who is taking the picture and why, because it sets distance, gaze and mood. A beach photo "on iPhone" is most likely taken by a friend or partner on holiday → candid moment, a few metres away, chest-to-eye height, relaxed and flattering. A selfie → arm's length, front camera. A stranger's street shot → farther, unaware subject.
+- **Moment**: give the person something to do and somewhere to look (walking along the water, laughing, pushing hair back, glancing at the sea). A stiff "standing, facing the camera, arms down" pose reads as a record shot; use it only for ID-style, product-fit or when asked.
+
 ## 4. Do not over-interpret
 
 Bad habits to avoid:
 
 - Turning every person into a model with perfect skin.
+- The opposite: making an undescribed person deliberately plain ("ordinary", "average-looking") or stiffly posed.
 - Adding "cinematic lighting, 8K, masterpiece, trending on ArtStation" to everything.
 - Making amateur photos look like studio photos.
 - Adding photorealism to anime, cartoons or flat graphics.

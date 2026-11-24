@@ -21,7 +21,7 @@ CONVENTIONAL_SUFFIX = (", masterpiece, best quality, ultra detailed, 8k, hyperre
 # Words that push style without being asked (counted only if absent from the request).
 BLOAT = [r"masterpiece", r"best quality", r"ultra[- ]?detailed", r"\b8k\b", r"\b4k\b", r"hyper-?realistic",
          r"award[- ]winning", r"trending on artstation", r"cinematic", r"breathtaking", r"stunning",
-         r"flawless", r"perfect (skin|face)", r"octane render", r"unreal engine"]
+         r"flawless", r"perfect (skin|face)", r"\bordinary\b", r"average-looking", r"octane render", r"unreal engine"]
 
 SLOTS = {
     "setting": r"\b(in|at|on|inside|outside|by|beside|street|room|kitchen|beach|market|shop|house|office|background|studio|city|park|temple|forest|table|garden|road|cafe|café|field|sky)\b",

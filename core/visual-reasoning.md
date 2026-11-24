@@ -31,6 +31,12 @@ For every subject ask: what holds it up?
 
 For each action: can a real body do it with these props? Name the grip ("holding the phone in her right hand, thumb on the screen"). Two people hugging: arms around shoulders or waist, heads turned to the side. Keep hand-object interactions simple; complex finger poses are a frequent failure.
 
+## 4b. Camera height and distance for people
+
+- Camera close and above the subject (phone held down at someone) makes the head large and legs short. For natural full-body proportions say "shot at chest height from a few metres away".
+- Low camera (hip height) makes people look taller; use for confident or fashion looks.
+- Full-body phone photos default to vertical 3:4 (or 9:16 for stories).
+
 ## 5. Visual hierarchy
 
 - One clear main subject (or a clearly described group).

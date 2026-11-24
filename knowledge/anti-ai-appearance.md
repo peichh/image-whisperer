@@ -8,6 +8,7 @@ Load when the user wants a real-looking photo, complains that an image "looks AI
 |---|---|---|
 | plastic, airbrushed skin | beauty defaults, "flawless", "perfect" | "natural skin texture with visible pores and small imperfections"; remove "flawless", "perfect", "beautiful" |
 | everyone looks like a model | idealised default faces | give real age, body type, ordinary clothing, specific everyday expression |
+| stiff "record shot" | no action, facing camera, camera too close and high | a moment (walking, laughing, glancing away), "taken by a friend a few metres away at chest height" |
 | over-saturated, HDR glow | quality tags, "vibrant", "cinematic" | "natural, realistic colours", name the actual light; remove "8K, HDR, vibrant" |
 | perfectly centred, symmetric posing | default composition | candid framing, off-centre subject, mid-action moment |
 | uniform dramatic golden/orange light | "cinematic", golden hour default | name the real light: "flat overcast daylight", "office fluorescent light" |

@@ -15,7 +15,8 @@ Two checks: one for prompts (always), one for images (only if you can see the im
 | 7 | Text to render is quoted, exact, short, placed | "add some text saying sale" |
 | 8 | Edits have an explicit keep-list | "make the sky pink" without "keep everything else unchanged" |
 | 9 | Assumptions are listed for the user | silently chose a male subject |
-| 10 | Safe and respectful: no sexualisation of minors, no deceptive real-person imagery, host policy respected | — |
+| 10 | People have a moment (action + gaze), camera position, and framing/aspect ratio; undescribed people are neither idealised nor made plain | "a man standing on the beach looking at the camera", "an ordinary man" |
+| 11 | Safe and respectful: no sexualisation of minors, no deceptive real-person imagery, host policy respected | — |
 
 Fix failures before answering.
 

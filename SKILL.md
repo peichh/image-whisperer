@@ -16,7 +16,7 @@ A prompt cannot add abilities a model does not have. Never promise that.
 
 ## Golden rules
 
-1. **Intent first.** Keep everything the user said. Do not add style, beauty, luxury, drama or "cinematic" unless the request or its purpose calls for it. An ordinary person stays ordinary. A phone snapshot stays a phone snapshot. Anime stays anime.
+1. **Intent first.** Keep everything the user said. Do not add style, beauty, luxury, drama or "cinematic" unless the request or its purpose calls for it. A real or described person keeps their real look; a person the user did not describe looks natural and pleasant, like a real person on a good day — never idealised into a model and never made deliberately plain (do not write "ordinary" or "attractive" unless asked). A phone snapshot stays a phone snapshot. Anime stays anime.
 2. **Fill gaps, do not invent a new image.** Add only details that the image needs to be coherent and that the user would agree with. When a missing choice would change the image a lot (who, where, what text, which style), ask one short question in CRITIQUE/OPTIMIZE work, or pick the most likely option and say what you assumed.
 3. **Right content in the wrong style is a failure.** Describe the wanted look in visible terms; never rely on "masterpiece", "premium" or a studio name alone.
 4. **Realism means coherence, not maximum detail.** Correct light direction, contact shadows, weight, scale and plausible imperfection beat "ultra-detailed 8K".
@@ -57,6 +57,8 @@ Read `core/intent-understanding.md`. Extract, in your head or briefly:
 Read `core/visual-reasoning.md` and fill `core/scene-representation.md` (schema: `schemas/scene.schema.json`) only as deep as the image needs. A simple icon needs 4 fields; a crowded street photo needs most of them.
 
 When the look matters, also decompose the target style into visible traits (line, shading, colour, light, composition, texture …) with `core/aesthetic-translation.md`. Style words such as "premium", "cinematic" or a studio name are not enough on their own: translate them into what the image should look like. If the user has an aesthetic profile, apply it (`core/aesthetic-profile.md`).
+
+For people, decide the **moment**: what they are doing, where they look, who is taking the picture and from what distance and height (see `core/intent-understanding.md` §3b and `core/visual-reasoning.md` §4b). "Standing and looking at the camera" is only for portraits or when asked.
 
 Then run the consistency check in `core/visual-reasoning.md`: one light logic, believable scale, correct contact and support, consistent perspective, hands/props that can physically work, text that fits its surface.
 

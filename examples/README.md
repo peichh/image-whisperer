@@ -107,3 +107,15 @@ An anime film still of a schoolgirl waiting alone at a small roadside bus stop i
 **User:** (shows two images) "ชอบรูป A มากกว่า รูป B ดูเป็นเกมมือถือ จำไว้ด้วย"
 
 **Answer:** "From your choice I see you like: matte shading instead of glossy gradients, a painted background with haze, a muted palette, the character off-centre. You dislike: big sparkly eyes, neon glow without a source. Save this as your style for next time?" → on yes, save to host memory; otherwise give `image-whisperer-profile.json` (format: `examples/aesthetic-profile.example.json`).
+
+## 11. Undescribed person — natural, not plain, with a moment (Gemini)
+
+**User:** "สร้างรูปผู้ชายเอเชียที่ริมหาด ถ่ายด้วยกล้องไอโฟน"
+
+**Reasoning:** no specific person → natural, pleasant-looking, not a model and not "ordinary". Photo story: a friend takes it on holiday → candid moment, a few metres away, chest height (natural proportions), vertical 3:4.
+
+```
+A candid iPhone photo of a Thai man in his mid-20s walking barefoot along the water's edge on a tropical beach in the late afternoon, taken by a friend a few metres away. His slightly messy black hair is lifted by the sea breeze; he laughs while pushing it back with one hand, glancing along the shoreline instead of at the camera. He wears an open light linen shirt over swim shorts; small waves wash over his feet and the wet sand reflects the sun. Vertical 3:4, full body, shot at chest height on the 1x main camera so his proportions look natural, slightly off-centre with the sea and a green headland behind him. Warm low side light, natural skin with a light tan, natural iPhone HDR colours.
+```
+Assumed: Thai, mid-20s, linen shirt over swim shorts. Say "หล่อแบบนายแบบ" or "ถอดเสื้อ" if you want that look.
+
