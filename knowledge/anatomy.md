@@ -18,6 +18,7 @@ Use only what the image needs. Realistic styles need more care; stylised styles 
 ## Hands
 
 - Hands fail most often. Reduce risk: give hands a clear simple task ("holding a mug with both hands", "hands in pockets", "resting on the table").
+- Count hands: every hand gets at most one task, and in a selfie one hand is holding the phone.
 - Avoid asking for complex finger gestures unless needed; if needed, describe one gesture exactly ("a thumbs-up with the right hand").
 - Hands touching objects need contact: fingers wrap around, pressure on soft things.
 

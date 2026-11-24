@@ -163,6 +163,15 @@ class Benchmark(unittest.TestCase):
         self.assertTrue(r["skill_missing"])
         self.assertTrue(r["added"])
 
+    def test_selfie_without_phone_hand_fails(self):
+        """Real regression (iw-113): both hands posed in a selfie, none holding the phone."""
+        case = next(c for c in self.cases if c["id"] == "iw-113")
+        old = (
+            "Vertical 3:4 candid smartphone selfie of a Thai female student in a classroom, raising her right hand in a peace sign "
+            "and resting her left arm on a wooden desk, shot at arm's length on a phone front camera."
+        )
+        self.assertTrue(bench.score(case, "C", old)["skill_missing"])
+
     def test_old_plain_record_shot_prompt_fails(self):
         """Real regression (iw-111): prompt that produced a stiff, plain beach photo on Gemini."""
         case = next(c for c in self.cases if c["id"] == "iw-111")

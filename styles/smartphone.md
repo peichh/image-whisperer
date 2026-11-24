@@ -12,6 +12,7 @@ Requests that say phone, mobile, candid, selfie, vlog, everyday, ถ่ายม
 - Candid framing: slightly tilted, subject not perfectly centred, cropped edges, real clutter.
 - Available light only, or harsh direct phone flash at night.
 - Who holds the phone matters: a friend a few metres away at chest height (natural proportions, candid moment), arm's-length selfie (wide distortion), or the phone held high and close (big head, short legs — avoid unless that is the look).
+- Selfies: one hand holds the phone. Name which hand ("holding the phone in her left hand at arm's length") and give any pose only the other hand; never assign both hands plus a selfie.
 - Portrait-orientation 3:4 is the native phone shape; use 9:16 for stories.
 
 ## Prompt words
