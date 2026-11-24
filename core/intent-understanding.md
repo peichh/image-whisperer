@@ -55,7 +55,7 @@ Translate mood words (often Thai) into what can be seen; a single adjective is u
 | เขิน, shy | eyes down or to the side, small smile, blush | shoulders in, hand near face; slightly high angle |
 | เศร้า, sad | brows raised in the middle, mouth corners down, wet eyes | head lowered; high angle, more empty space |
 
-Use the body/camera column only when the framing shows the body; for a face or portrait request change only the face. Never add props or actions (weapons, fists, a fight) the user did not ask for.
+Use the body/camera column whenever the body is in frame (half- or full-body, portraits included); for a face-only close-up change only the face. The moment from 3b still applies, but keep it small and in the mood (weight on one leg, arms folded) — never turn a mood into a plot with weapons, fights or props the user did not ask for.
 
 Keep the user's exact word in mind: "หยิ่ง" is not "ดุ". If two readings are possible, pick the one closest to the word and list it under "Assumed".
 
