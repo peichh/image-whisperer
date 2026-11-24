@@ -249,6 +249,13 @@ class StyleFidelity(unittest.TestCase):
         self.assertTrue(sf.score(c, "The girl at the bus stop in the rain, not glossy or doll-like, with sparkles everywhere.")["unwanted"])
         self.assertFalse(sf.score(c, "a girl at a bus stop in the rain --ar 16:9 --no sparkles, neon")["unwanted"])
 
+    def test_negated_traits_earn_no_axis_credit(self):
+        c = next(x for x in self.cases if x["id"] == "sf-010")
+        full = sf.score(c, c["c_skill"])
+        self.assertEqual(full["axis_coverage"], 1.0)
+        removed = sf.score(c, c["c_skill"].replace("thick bold outlines", "no outlines"))
+        self.assertIn("line", removed["missing_axes"])
+
     def test_verdict_fixtures(self):
         for line in (ROOT / "benchmarks" / "style-fidelity" / "rubric-fixtures.jsonl").read_text(encoding="utf-8").splitlines():
             f = json.loads(line)

@@ -57,11 +57,12 @@ def score(case, prompt, negative=""):
     t = prompt
     sem = sum(bool(re.search(k, t, re.I)) for k in case["keep"]) / len(case["keep"])
     axes = case["axes"]
-    hit = [a for a, rx in axes.items() if re.search(rx, t, re.I)]
+    pos = positive(t)
+    hit = [a for a, rx in axes.items() if re.search(rx, pos, re.I)]
     cov = len(hit) / len(axes)
     labels = [l for l in LABELS if re.search(l, t, re.I)]
     label_only = bool(labels) and cov < 0.5
-    unwanted = [a for a in case["avoid"] if re.search(a, positive(t), re.I) and not re.search(a, case["request"], re.I)]
+    unwanted = [a for a in case["avoid"] if re.search(a, pos, re.I) and not re.search(a, case["request"], re.I)]
     lint = base.lint(case["target"], prompt, negative, "prompt_only")
     ok = sem == 1 and cov >= 0.8 and not label_only and not unwanted and not lint
     return {"semantic": sem, "axis_coverage": cov, "missing_axes": sorted(set(axes) - set(hit)), "label_only": label_only,
