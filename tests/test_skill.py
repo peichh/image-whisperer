@@ -248,6 +248,7 @@ class StyleFidelity(unittest.TestCase):
         self.assertFalse(sf.score(c, c["c_skill"])["unwanted"])  # contains 'not glossy'
         self.assertTrue(sf.score(c, "The girl at the bus stop in the rain, not glossy or doll-like, with sparkles everywhere.")["unwanted"])
         self.assertFalse(sf.score(c, "a girl at a bus stop in the rain --ar 16:9 --no sparkles, neon")["unwanted"])
+        self.assertFalse(sf.score(c, "a girl at a bus stop in the rain --no lens-flare, sparkles, neon --ar 16:9")["unwanted"])
 
     def test_negated_traits_earn_no_axis_credit(self):
         c = next(x for x in self.cases if x["id"] == "sf-010")

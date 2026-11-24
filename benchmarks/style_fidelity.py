@@ -50,7 +50,7 @@ def verdict(semantic: int, aesthetic: int, execution: int) -> str:
 def positive(text: str) -> str:
     """Drop negated phrases (up to the next comma or sentence break) and Midjourney `--no` lists,
     so 'not glossy' does not count as asking for gloss."""
-    return NEGATION.sub(" ", re.sub(r"--no\s[^-]*", " ", text))
+    return NEGATION.sub(" ", re.sub(r"--no\s.*?(?=\s--|$)", " ", text, flags=re.S))
 
 
 def score(case, prompt, negative=""):
