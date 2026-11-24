@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/peichh/image-whisperer/schemas/benchmark-case.schema.json",
+  "title": "Image Whisperer prompt-level benchmark case",
+  "type": "object",
+  "required": [
+    "id",
+    "lang",
+    "category",
+    "mode",
+    "target",
+    "request",
+    "must_keep",
+    "must_not_add",
+    "c_skill"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z]+-[0-9]{3}$"
+    },
+    "lang": {
+      "type": "string",
+      "enum": [
+        "th",
+        "en"
+      ]
+    },
+    "category": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "prompt_only",
+        "edit",
+        "critique",
+        "optimize",
+        "reference",
+        "compare"
+      ]
+    },
+    "target": {
+      "type": "string",
+      "enum": [
+        "gemini",
+        "flux",
+        "midjourney",
+        "sdxl",
+        "qwen-image",
+        "z-image",
+        "seedream",
+        "universal"
+      ]
+    },
+    "context": {
+      "type": "string",
+      "description": "earlier conversation turn or previous prompt, for revisions"
+    },
+    "request": {
+      "type": "string"
+    },
+    "must_keep": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "regex alternatives (case-insensitive); each must match the output"
+    },
+    "must_not_add": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "regex; none may match unless present in the request"
+    },
+    "a_raw": {
+      "type": "string",
+      "description": "defaults to request"
+    },
+    "b_conventional": {
+      "type": "string",
+      "description": "defaults to the generic quality-tag enhancer in benchmarks/run.py"
+    },
+    "c_skill": {
+      "type": "string"
+    },
+    "c_negative": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+# Worked examples
+
+Each example shows the request, the hidden reasoning in short, and the final answer. These are prompt examples only; no images were generated for this repository.
+
+## 1. AUTO / PROMPT ONLY — vague Thai request (Gemini app)
+
+**User:** "ขอรูปหมาน่ารักๆ"
+
+**Reasoning:** purpose unknown → neutral; "cute dog" with no breed → pick a common, friendly-looking choice and say so; photo is the most likely type.
+
+**Answer:**
+```
+A sweet, natural photo of a fluffy cream-coloured Pomeranian puppy sitting on a sunny wooden floor, head tilted slightly, looking up at the camera with bright eyes. Soft morning window light, a few toys blurred in the background, warm and cosy mood.
+```
+Assumed: Pomeranian puppy, photo style, indoor. Want a different breed, a cartoon, or a specific use (wallpaper, sticker)?
+
+## 2. Keeping a person ordinary (Gemini)
+
+**User:** "Photo of my dad, 58, fixing his motorbike in front of our house in Chiang Mai, real look, not too pretty"
+
+```
+A candid smartphone photo of a 58-year-old Thai man squatting beside an old red Honda Wave motorbike in front of a simple two-storey house in Chiang Mai, tightening a bolt with a spanner, focused expression. He wears a faded polo shirt, shorts and rubber sandals; grease on his fingers. Late-morning sun, a concrete driveway, potted plants and a parked bicycle around. Natural skin with wrinkles and sun spots, everyday colours, slightly off-centre framing at eye level.
+```
+Not added: studio light, model looks, "cinematic", 8K.
+
+## 3. EDIT — keep identity (Gemini)
+
+**User:** (uploads graduation photo) "เปลี่ยนพื้นหลังเป็นหน้าหอประชุมจุฬาฯ ไม่ต้องเปลี่ยนหน้า"
+
+**Changes:** background → front of Chulalongkorn University's Auditorium.  
+**Keep unchanged:** face, identity, gown and sash, pose, bouquet, camera angle, lighting on the person.
+
+```
+Using the provided photo, replace only the background with the front of the Chulalongkorn University Auditorium in Bangkok on a clear sunny morning, with its traditional Thai-style roof and steps. Keep the graduate's face, identity, hairstyle, gown, sash, bouquet, pose and framing exactly the same, and match the background light direction to the light on the person.
+```
+
+## 4. CRITIQUE (any host that can see the image)
+
+**User:** "ทำไมรูปนี้ดูเป็น AI" (a portrait with glossy skin, orange glow, perfect symmetry)
+
+1. Skin looks airbrushed → ask for "natural skin texture with visible pores and small imperfections".
+2. Strong orange "golden hour" glow on an indoor scene → name the real light: "soft daylight from a window on the left".
+3. Perfectly centred, stiff pose → "candid, slightly off-centre framing, mid-laugh".
+
+Edit instruction:
+```
+Keep the same person, clothes and room, but make the skin look natural with visible pores and small imperfections, replace the orange glow with soft neutral daylight from the window on the left, and reframe slightly off-centre as a candid moment.
+```
+
+## 5. OPTIMIZE — bloated prompt (FLUX.2)
+
+**User prompt:** "masterpiece, best quality, 8k, ultra detailed, beautiful woman, coffee shop, cinematic lighting, bokeh, trending on artstation, no ugly, no bad hands"
+
+**Improved:**
+```
+A woman in her late twenties sitting by the window of a small neighbourhood coffee shop, both hands around a ceramic latte cup, smiling at someone off-camera. Rainy afternoon outside, soft grey window light on her face, warm pendant lamps behind her, background softly out of focus. Natural photo, shot on a 50mm lens, true-to-life colours.
+```
+What changed: removed quality tags (no effect on FLUX); removed negative phrases (FLUX has no negative prompt) and gave the hands a simple task instead; added a real light source; replaced "beautiful" with a concrete moment.
+
+## 6. REFERENCE — product + model (Gemini 3 Pro Image / Nano Banana 2.1)
+
+```
+Use image 1 for the woman's face and identity, and image 2 for the skincare bottle. Create a bright, clean lifestyle photo of the woman from image 1 in a white bathroom holding the bottle from image 2 near her cheek, smiling softly. Keep her face exactly as in image 1 and the bottle's shape, colour and label text exactly as in image 2. Soft daylight from a frosted window, vertical 4:5.
+```
+
+## 7. COMPARE — one idea, three models
+
+**User:** "Floating market at dawn, for a travel blog header"
+
+**Gemini**
+```
+A wide travel-blog header photo of Damnoen Saduak floating market at dawn: wooden boats loaded with tropical fruit and vegetables, vendors in wide-brimmed straw hats paddling along a narrow canal, soft pink-orange early light and light mist on the water, traditional wooden houses on both banks. Wide 16:9 composition with calm sky in the upper third for a title. Natural, true-to-life colours.
+```
+**Midjourney**
+```
+Damnoen Saduak floating market at dawn, wooden boats full of tropical fruit, vendors in straw hats, misty canal, soft pink morning light, travel photography, calm sky for title space --ar 16:9 --raw
+```
+**SDXL**
+```
+travel photo, Thai floating market at dawn, wooden boats loaded with tropical fruit, vendors in straw hats paddling, narrow canal with light mist, soft pink morning light, wooden houses on both banks, wide shot, natural colours
+Negative prompt: oversaturated, cartoon, blurry, text, watermark
+```
+Differences: Gemini gets purpose and layout in prose; Midjourney gets a short prompt with `--ar` and `--raw`; SDXL gets compact phrases and a short negative prompt.
+
+## 8. Conversational revision
+
+Turn 1 prompt: example 1 (Pomeranian).  
+**User:** "ขอเป็นแนวการ์ตูน แต่ตัวเดิม"
+
+```
+Turn the same fluffy cream-coloured Pomeranian puppy into a cute flat cartoon illustration: same pose with head tilted, big bright eyes, simple rounded shapes, soft pastel background, clean outlines.
+```
+Only the style changed; the subject and pose stayed.

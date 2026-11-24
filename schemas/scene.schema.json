@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/peichh/image-whisperer/schemas/scene.schema.json",
+  "title": "Image Whisperer scene representation",
+  "type": "object",
+  "required": ["purpose", "image_type"],
+  "additionalProperties": false,
+  "properties": {
+    "purpose": {"type": "string"},
+    "image_type": {"type": "string", "enum": ["photo", "illustration", "anime", "painting", "3d", "graphic", "mixed"]},
+    "style": {"type": "string"},
+    "subjects": {"type": "array", "items": {
+      "type": "object", "required": ["id", "description"], "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string"}, "description": {"type": "string"}, "count": {"type": "integer", "minimum": 1},
+        "pose": {"type": "string"}, "expression": {"type": "string"}, "action": {"type": "string"},
+        "clothing": {"type": "string"}, "position": {"type": "string"}}}},
+    "relationships": {"type": "array", "items": {
+      "type": "object", "required": ["from", "to", "relation"], "additionalProperties": false,
+      "properties": {"from": {"type": "string"}, "to": {"type": "string"}, "relation": {"type": "string"}}}},
+    "environment": {"type": "object", "additionalProperties": {"type": "string"}},
+    "layers": {"type": "object", "additionalProperties": false,
+      "properties": {"foreground": {"type": "string"}, "midground": {"type": "string"}, "background": {"type": "string"}}},
+    "composition": {"type": "object", "additionalProperties": {"type": "string"}},
+    "camera": {"type": "object", "additionalProperties": {"type": "string"}},
+    "lighting": {"type": "object", "additionalProperties": {"type": "string"}},
+    "color": {"type": "object", "additionalProperties": {"type": ["string", "array"]}},
+    "materials": {"type": "array", "items": {"type": "object", "required": ["surface", "look"],
+      "properties": {"surface": {"type": "string"}, "look": {"type": "string"}}}},
+    "physics": {"type": "string"},
+    "text": {"type": "array", "items": {"type": "object", "required": ["content"],
+      "properties": {"content": {"type": "string"}, "language": {"type": "string"}, "placement": {"type": "string"}, "style": {"type": "string"}}}},
+    "hierarchy": {"type": "array", "items": {"type": "string"}},
+    "exclusions": {"type": "array", "items": {"type": "string"}},
+    "edit": {"type": "object", "required": ["changes", "keep"],
+      "properties": {"source": {"type": "string"}, "changes": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "keep": {"type": "array", "items": {"type": "string"}, "minItems": 1}}},
+    "references": {"type": "array", "items": {"type": "object", "required": ["id", "use"],
+      "properties": {"id": {"type": "string"}, "use": {"type": "string", "enum": ["identity", "product", "style", "layout", "pose", "background"]}, "notes": {"type": "string"}}}},
+    "assumptions": {"type": "array", "items": {"type": "string"}}
+  }
+}
