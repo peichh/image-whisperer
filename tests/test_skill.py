@@ -150,6 +150,19 @@ class Benchmark(unittest.TestCase):
     def test_report_is_current(self):
         self.assertEqual((ROOT / "benchmarks" / "REPORT.md").read_text(encoding="utf-8"), bench.report(bench.run()))
 
+    def test_old_anime_assassin_prompt_fails(self):
+        """Real regression (iw-112): prompt that produced Western-comic style, a scowl and an unrequested neon city on Gemini."""
+        case = next(c for c in self.cases if c["id"] == "iw-112")
+        old = (
+            "An anime character illustration of a young woman with shoulder-length black hair, a cold, haughty expression, and a diagonal scar across her left cheek. "
+            "She wears a fitted cropped black leather jacket, low-slung leather utility belts with pouches and a sheathed dagger, black leather short shorts, dark thigh straps, fingerless gloves and a forearm guard. "
+            "Three-quarter standing shot on a wet concrete rooftop at night in the rain, facing forward with blurred cyan and pink neon signs. "
+            "The style: crisp dark ink line art, cel-shaded coloring, expressive anime eyes."
+        )
+        r = bench.score(case, "C", old)
+        self.assertTrue(r["skill_missing"])
+        self.assertTrue(r["added"])
+
     def test_old_plain_record_shot_prompt_fails(self):
         """Real regression (iw-111): prompt that produced a stiff, plain beach photo on Gemini."""
         case = next(c for c in self.cases if c["id"] == "iw-111")

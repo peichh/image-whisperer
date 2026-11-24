@@ -18,7 +18,7 @@ Load when a style matters (illustration, anime, concept art, posters, character 
 | centred symmetric composition | subject dead centre, mirrored layout | "subject in the left third, looking into the open space"; uneven spacing |
 | artificial expressions | wide open smile with teeth, generic surprise | a specific small expression tied to the situation ("tired half-smile", "biting her lip while reading") |
 | unmotivated visual effects | floating particles, lens flares, glowing auras, bokeh balls with no cause | remove them; add effects only with a cause ("dust in the beam of window light") |
-| genre-default setting | an unrequested setting the genre stereotypically implies (assassin → neon cyberpunk rain, wizard → glowing ruins) | a quiet setting that supports the character, chosen on purpose and listed as an assumption |
+| genre-default setting or costume | an unrequested setting or gear the genre stereotypically implies (assassin → neon cyberpunk rain, fingerless gloves, thigh straps, forearm guards, pouches; wizard → glowing ruins) | a quiet setting that supports the character, chosen on purpose and listed as an assumption |
 | over-polished digital surfaces | plastic-smooth skin and fabric, airbrushed gradients, no texture | a texture treatment ("visible brush strokes", "paper grain", "slight colour bleeding") and an imperfection ("slightly uneven line, hand-made feel") |
 
 ## Workflow
