@@ -20,6 +20,11 @@ Use when the target model is unknown, not listed, or a chat app whose image mode
 4. Quote exact text; keep it short.
 5. If the user later names the model, recompile with that adapter.
 
+## Aesthetic translation
+
+- Describe the look with 4-6 concrete traits in one "The style:" sentence; avoid labels alone.
+- If the host accepts reference images, use one for style and name what to take from it.
+
 ## Editing
 
 "Edit the provided image: <change>. Keep <keep list> exactly the same." Works in most chat-based editors.

@@ -18,6 +18,11 @@ Official guide: describe **subject + action + environment** in clear natural lan
 4. Multi-image output (story sets, variations, sticker sets) is supported: state the number and what differs between images ("Generate 4 images showing the same cat in spring, summer, autumn and winter").
 5. Size/ratio are API parameters.
 
+## Aesthetic translation
+
+- [V] The official guide asks for precise style, colour and lighting words and warns against stacks of ornate adjectives: use concrete traits, not "exquisite, premium, stunning".
+- Multi-image input can carry style: "use the colour palette and line work of image 2".
+
 ## Editing
 
 From the official guide:

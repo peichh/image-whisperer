@@ -24,6 +24,12 @@ Negative prompt: <short list of relevant unwanted traits>
 5. **Text rendering** is weak on SD 1.5/SDXL; recommend adding text afterwards. SD3.x is better but still limited.
 6. **Thai**: CLIP encoders handle Thai poorly. Always write the prompt in English.
 
+## Aesthetic translation
+
+- The checkpoint and LoRAs decide most of the aesthetic; say which style traits to emphasise in the first phrases.
+- Negative prompt can target the generic traits the user dislikes ("glossy, airbrushed, neon glow, generic anime face"), kept short.
+- Concrete style phrases beat quality tags; use at most one weight on the defining trait if it keeps being ignored.
+
 ## Editing
 
 - img2img with denoise 0.3-0.6 for style/colour changes keeping layout.

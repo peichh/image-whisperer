@@ -91,3 +91,19 @@ Turn 1 prompt: example 1 (Pomeranian).
 Turn the same fluffy cream-coloured Pomeranian puppy into a cute flat cartoon illustration: same pose with head tilted, big bright eyes, simple rounded shapes, soft pastel background, clean outlines.
 ```
 Only the style changed; the subject and pose stayed.
+
+## 9. Aesthetic translation — "premium" without the generic look (Gemini)
+
+**User:** "ภาพอนิเมะพรีเมียมแบบหนังโรง เด็กหญิงยืนรอรถเมล์ตอนฝนตก"
+
+**Reasoning:** "premium" and "หนังโรง" are labels; Gemini may turn them into generic illustration. Translate to visible traits: fine varied lines, restrained 2-tone shading, painted background, desaturated palette with one warm accent, small off-centre subject, rain haze, quiet face.
+
+```
+An anime film still of a schoolgirl waiting alone at a small roadside bus stop in heavy rain at dusk, holding a closed umbrella. The style: a theatrical anime film look rather than a game illustration — fine, slightly varying line work, restrained two-tone cel shading on the character, and a richly hand-painted background. Cool, desaturated blue-grey palette broken by the warm glow of a traffic light reflected on the wet road. The girl stands small in the right third of a wide 16:9 frame, rain haze softening the distant houses, faint painted texture and grain. Her face is quiet and simple, eyes lowered, not glossy or doll-like.
+```
+
+## 10. Aesthetic profile from an A/B choice
+
+**User:** (shows two images) "ชอบรูป A มากกว่า รูป B ดูเป็นเกมมือถือ จำไว้ด้วย"
+
+**Answer:** "From your choice I see you like: matte shading instead of glossy gradients, a painted background with haze, a muted palette, the character off-centre. You dislike: big sparkly eyes, neon glow without a source. Save this as your style for next time?" → on yes, save to host memory; otherwise give `image-whisperer-profile.json` (format: `examples/aesthetic-profile.example.json`).

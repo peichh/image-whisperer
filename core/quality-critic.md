@@ -47,3 +47,17 @@ Fixed prompt / edit instruction:
 ```
 
 If the image is fine, say so. Do not invent problems.
+
+## E. Style fidelity scoring (when style matters and an image is visible)
+
+Score three separate axes, 1-5. Do not merge them.
+
+| Axis | Question | 5 means |
+|---|---|---|
+| Semantic accuracy | Is everything requested there and correct (subjects, counts, actions, text)? | all faithfulness questions pass |
+| Aesthetic fidelity | Does it match the requested look on the defining axes of `core/aesthetic-translation.md` (and the user's profile)? | every defining axis matches |
+| Artistic execution | Is the style carried out with skill: coherent line, light, composition, no generic traits from `knowledge/anti-generic-aesthetics.md` the user did not want? | a skilled artist working in that style could have made it |
+
+**Success requires semantic ≥ 4 AND aesthetic ≥ 4 AND execution ≥ 3.** An image with everything present but the wrong style (e.g. semantic 5, aesthetic 2) is a **failure**, never an automatic success. Report it as "content correct, style off".
+
+For aesthetic fidelity, check each defining axis as a yes/no question ("Are the lines fine and varied?", "Is the palette muted?"). Fix the axes that fail with concrete visual wording or a style reference — not by adding praise words or making the prompt longer. If two rounds do not move the style, say the model may not reach this style and suggest a style reference image or another model.

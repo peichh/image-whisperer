@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "benchmarks"))
 sys.path.insert(0, str(ROOT / "scripts"))
 import run as bench  # noqa: E402
 import build_dist  # noqa: E402
+import style_fidelity as sf  # noqa: E402
 
 
 def frontmatter(text):
@@ -79,7 +80,7 @@ class Modules(unittest.TestCase):
     def test_adapters_have_sections(self):
         for name in ("gemini", "flux", "midjourney", "sdxl", "qwen-image", "z-image", "seedream", "universal"):
             t = (ROOT / "adapters" / f"{name}.md").read_text(encoding="utf-8")
-            for sec in ("## Prompt form", "## Rules", "## Editing", "## Example"):
+            for sec in ("## Prompt form", "## Rules", "## Aesthetic translation", "## Editing", "## Example"):
                 self.assertIn(sec, t, f"{name}: {sec}")
             self.assertIn(name, bench.BANDS)
 
@@ -154,6 +155,108 @@ class Benchmark(unittest.TestCase):
         self.assertTrue(bench.lint("flux", "a cat " * 20, "blurry"))
         self.assertTrue(bench.lint("midjourney", "a cat :: 2 dog --v 8", ""))
         self.assertFalse(bench.lint("midjourney", "a grey cat asleep on a sunny windowsill --ar 3:2 --raw", ""))
+
+
+AXES = ["line", "shape_language", "anatomy", "face", "shading", "color", "lighting", "materials", "composition",
+        "perspective", "atmosphere", "density", "motion", "texture", "imperfection", "emotion"]
+
+
+class AestheticEngine(unittest.TestCase):
+    def test_modules_routed_from_skill(self):
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        for f in ("core/aesthetic-translation.md", "knowledge/anti-generic-aesthetics.md", "core/aesthetic-profile.md"):
+            self.assertIn(f"`{f}`", skill)
+        self.assertIn("PROFILE", skill)
+
+    def test_sixteen_axes_documented(self):
+        t = (ROOT / "core" / "aesthetic-translation.md").read_text(encoding="utf-8").lower()
+        for words in ("line", "shape language", "anatomical stylisation", "facial design", "shading", "colour grading",
+                      "lighting behaviour", "material rendering", "compositional hierarchy", "perspective",
+                      "atmospheric depth", "visual density", "motion representation", "texture treatment",
+                      "artistic imperfection", "emotional expression"):
+            self.assertIn(words, t)
+        schema = json.loads((ROOT / "schemas" / "aesthetic-profile.schema.json").read_text(encoding="utf-8"))
+        self.assertEqual(schema["$defs"]["axis"]["enum"], AXES)
+
+    def test_generic_traits_covered(self):
+        t = (ROOT / "knowledge" / "anti-generic-aesthetics.md").read_text(encoding="utf-8").lower()
+        for trait in ("generic anime face", "repetitive character design", "mobile-game", "thick outlines", "flat lighting",
+                      "artificial poses", "neon saturation", "symmetric composition", "artificial expressions",
+                      "unmotivated visual effects", "over-polished"):
+            self.assertIn(trait, t)
+        self.assertIn("never remove a trait the user asked for", t)
+
+    def test_profile_example_matches_schema(self):
+        schema = json.loads((ROOT / "schemas" / "aesthetic-profile.schema.json").read_text(encoding="utf-8"))
+        p = json.loads((ROOT / "examples" / "aesthetic-profile.example.json").read_text(encoding="utf-8"))
+        for k in schema["required"]:
+            self.assertIn(k, p)
+        for k in p:
+            self.assertIn(k, schema["properties"])
+        trait_keys = set(schema["$defs"]["trait"]["properties"])
+        for t in p["likes"] + p["dislikes"]:
+            self.assertIn(t["axis"], AXES)
+            self.assertLessEqual(set(t), trait_keys)
+        self.assertTrue(p["consent"]["user_approved"])
+
+    def test_critic_has_three_axis_rule(self):
+        t = (ROOT / "core" / "quality-critic.md").read_text(encoding="utf-8")
+        for w in ("Semantic accuracy", "Aesthetic fidelity", "Artistic execution", "never an automatic success"):
+            self.assertIn(w, t)
+
+
+class StyleFidelity(unittest.TestCase):
+    def setUp(self):
+        self.cases = sf.load()
+        self.rows = sf.run()
+        self.schema = json.loads((ROOT / "schemas" / "style-fidelity-case.schema.json").read_text(encoding="utf-8"))
+
+    def test_cases_schema_and_coverage(self):
+        self.assertGreaterEqual(len(self.cases), 20)
+        self.assertEqual({c["kind"] for c in self.cases}, set(self.schema["properties"]["kind"]["enum"]))
+        self.assertEqual({c["lang"] for c in self.cases}, {"th", "en"})
+        for c in self.cases:
+            for k in self.schema["required"]:
+                self.assertIn(k, c, c["id"])
+            for k in c:
+                self.assertIn(k, self.schema["properties"], c["id"])
+            self.assertLessEqual(set(c["axes"]), set(AXES), c["id"])
+            if "profile" in c:
+                self.assertTrue((ROOT / c["profile"]).exists())
+
+    def test_skill_prompts_pass(self):
+        self.assertEqual([(r["id"], r["C"]) for r in self.rows if not r["C"]["pass"]], [])
+
+    def test_content_only_prompts_never_pass(self):
+        """Right content, no style description: must fail (semantic-only arm)."""
+        for r in self.rows:
+            self.assertEqual(r["S"]["semantic"], 1.0, r["id"])
+            self.assertFalse(r["S"]["pass"], r["id"])
+
+    def test_label_stacking_never_passes(self):
+        for r in self.rows:
+            self.assertFalse(r["B"]["pass"], r["id"])
+
+    def test_intentional_generic_is_kept(self):
+        for c in self.cases:
+            if c["kind"] == "intentional_generic":
+                self.assertNotRegex(c["c_skill"], r"rather than a (mobile|game)", c["id"])
+
+    def test_unwanted_traits_detected_but_negations_ignored(self):
+        c = next(x for x in self.cases if x["id"] == "sf-001")
+        self.assertTrue(sf.score(c, c["c_skill"] + " Glossy sparkles everywhere.")["unwanted"])
+        self.assertFalse(sf.score(c, c["c_skill"])["unwanted"])  # contains 'not glossy'
+
+    def test_verdict_fixtures(self):
+        for line in (ROOT / "benchmarks" / "style-fidelity" / "rubric-fixtures.jsonl").read_text(encoding="utf-8").splitlines():
+            f = json.loads(line)
+            self.assertEqual(sf.verdict(f["semantic"], f["aesthetic"], f["execution"]), f["expected"], f["id"])
+        self.assertNotEqual(sf.verdict(5, 1, 5), "success")
+        with self.assertRaises(ValueError):
+            sf.verdict(6, 4, 4)
+
+    def test_report_is_current(self):
+        self.assertEqual((ROOT / "benchmarks" / "style-fidelity" / "REPORT.md").read_text(encoding="utf-8"), sf.report(self.rows))
 
 
 class Distribution(unittest.TestCase):

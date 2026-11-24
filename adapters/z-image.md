@@ -21,6 +21,11 @@ Official example prompts are long, specific descriptions (often 80-200 words) in
 - Resolution is a pipeline setting.
 - The project ships a Prompt Enhancer; this skill's output can replace it or be fed into it.
 
+## Aesthetic translation
+
+- [V] Z-Image-Turbo is documented for strong photorealism. [I] For non-photo styles, state the medium first and repeat it with concrete traits ("flat gouache illustration … visible brush texture, no photographic detail") so it does not drift to photo rendering.
+- Base model: a short negative prompt can target disliked generic traits; Turbo ignores negative prompts.
+
 ## Editing (Z-Image-Edit)
 
 Instruction plus explicit keep-list, as in `core/image-editing.md`: "Replace the background with a snowy mountain view, keep the woman, her pose, clothes and lighting direction unchanged."

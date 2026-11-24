@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/peichh/image-whisperer/schemas/aesthetic-profile.schema.json",
+  "title": "Image Whisperer user aesthetic profile",
+  "type": "object",
+  "required": ["profile_version", "name", "likes", "dislikes"],
+  "additionalProperties": false,
+  "$defs": {
+    "axis": {"type": "string", "enum": ["line", "shape_language", "anatomy", "face", "shading", "color", "lighting", "materials", "composition", "perspective", "atmosphere", "density", "motion", "texture", "imperfection", "emotion"]},
+    "trait": {
+      "type": "object", "required": ["axis", "trait"], "additionalProperties": false,
+      "properties": {
+        "axis": {"$ref": "#/$defs/axis"},
+        "trait": {"type": "string", "minLength": 3},
+        "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+        "scope": {"type": "string", "description": "limit to a project or image type; omit for all work"},
+        "source": {"type": "string"}
+      }
+    }
+  },
+  "properties": {
+    "profile_version": {"const": 1},
+    "name": {"type": "string"},
+    "label": {"type": "string", "description": "optional human label, e.g. a style name; never used alone"},
+    "updated": {"type": "string"},
+    "hard_rules": {"type": "array", "items": {"type": "string"}},
+    "likes": {"type": "array", "items": {"$ref": "#/$defs/trait"}},
+    "dislikes": {"type": "array", "items": {"$ref": "#/$defs/trait"}},
+    "model_notes": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}}},
+    "evidence": {"type": "array", "items": {
+      "type": "object", "required": ["signal", "summary"], "additionalProperties": false,
+      "properties": {
+        "signal": {"type": "string", "enum": ["liked_image", "disliked_image", "reference_image", "comparison", "feedback"]},
+        "summary": {"type": "string"},
+        "axes": {"type": "array", "items": {"$ref": "#/$defs/axis"}}
+      }}},
+    "consent": {"type": "object", "additionalProperties": false,
+      "properties": {"stored_in": {"type": "string", "enum": ["host_memory", "file", "none"]}, "user_approved": {"type": "boolean"}}}
+  }
+}

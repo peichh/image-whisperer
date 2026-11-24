@@ -1,0 +1,31 @@
+{
+  "profile_version": 1,
+  "name": "peach-anime-film",
+  "label": "quiet theatrical anime",
+  "updated": "2026-11-24",
+  "hard_rules": [
+    "No mobile-game illustration look: no glossy gradients, no rim light on every edge, no sparkles",
+    "Characters have individual faces, never the same face"
+  ],
+  "likes": [
+    {"axis": "line", "trait": "fine lines with slight weight variation, thinner on distant objects", "confidence": "high", "source": "feedback"},
+    {"axis": "shading", "trait": "restrained two-tone cel shading on characters", "confidence": "medium", "source": "comparison"},
+    {"axis": "color", "trait": "muted, slightly desaturated palette with one warm accent", "confidence": "medium", "source": "liked_image"},
+    {"axis": "atmosphere", "trait": "hand-painted backgrounds with haze and depth", "confidence": "medium", "source": "liked_image"},
+    {"axis": "composition", "trait": "subject small and off-centre in a wide frame", "confidence": "low", "source": "liked_image"},
+    {"axis": "emotion", "trait": "quiet, understated expressions", "confidence": "low", "source": "liked_image"}
+  ],
+  "dislikes": [
+    {"axis": "face", "trait": "huge glossy eyes with multiple sparkles", "confidence": "high", "source": "feedback"},
+    {"axis": "color", "trait": "neon purple-cyan glow without a light source", "confidence": "medium", "source": "disliked_image"},
+    {"axis": "texture", "trait": "plastic-smooth airbrushed surfaces", "confidence": "medium", "source": "comparison"}
+  ],
+  "model_notes": {
+    "gemini": ["Say 'a theatrical anime film look rather than a game illustration' explicitly", "Use a style reference image when available"]
+  },
+  "evidence": [
+    {"signal": "comparison", "summary": "Preferred image A (painted background, matte shading) over B (glossy, neon, centred)", "axes": ["shading", "texture", "color", "composition"]},
+    {"signal": "feedback", "summary": "'ตาใหญ่วิบวับเกินไป ดูเป็นเกมมือถือ'", "axes": ["face"]}
+  ],
+  "consent": {"stored_in": "file", "user_approved": true}
+}
