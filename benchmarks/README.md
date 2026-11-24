@@ -2,7 +2,7 @@
 
 ## What is measured
 
-`cases.jsonl` holds 113 prompt-level cases (Thai and English) across 31 categories and all 8 adapters: vague and detailed requests, people, groups, complex poses, smartphone looks, anime and other styles, products, architecture, graphics with text, edits, references, conversational revisions, optimisation, critique and cross-model comparison. Schema: `schemas/benchmark-case.schema.json`.
+`cases.jsonl` holds 114 prompt-level cases (Thai and English) across 31 categories and all 8 adapters: vague and detailed requests, people, groups, complex poses, smartphone looks, anime and other styles, products, architecture, graphics with text, edits, references, conversational revisions, optimisation, critique and cross-model comparison. Schema: `schemas/benchmark-case.schema.json`.
 
 Each case compares three prompts:
 

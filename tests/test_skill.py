@@ -172,6 +172,17 @@ class Benchmark(unittest.TestCase):
         )
         self.assertTrue(bench.score(case, "C", old)["skill_missing"])
 
+    def test_old_wide_staged_selfie_prompt_fails(self):
+        """Real regression (iw-114): wide selfie with a detailed set read as staged next to ChatGPT's close selfie."""
+        case = next(c for c in self.cases if c["id"] == "iw-114")
+        old = (
+            "Vertical 3:4 candid smartphone selfie of a young Thai woman, around 19, in a Thai student uniform inside a classroom. "
+            "Leaning slightly forward toward the front camera with a bright, genuine open-mouthed smile, she raises her right hand in a two-finger peace sign "
+            "with her index finger lightly poking her right cheek, resting her left arm on a wooden desk. Behind her are scuffed off-white classroom lockers "
+            "with peeled pink sticker residue and high rectangular glass windows. Shot at arm's length on a phone front camera with natural phone HDR."
+        )
+        self.assertTrue(bench.score(case, "C", old)["skill_missing"])
+
     def test_old_plain_record_shot_prompt_fails(self):
         """Real regression (iw-111): prompt that produced a stiff, plain beach photo on Gemini."""
         case = next(c for c in self.cases if c["id"] == "iw-111")
