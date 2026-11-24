@@ -8,7 +8,7 @@ Cases: 111 (56 Thai, 55 English), 31 categories, 8 target models.
 
 | Metric | A raw | B conventional | C Image Whisperer | Better is |
 |---|---|---|---|---|
-| Intent preservation (must-keep items present) | 89.2% | 89.5% | 100.0% | higher |
+| Intent preservation (must-keep items present) | 89.6% | 89.9% | 100.0% | higher |
 | Unrequested additions per prompt | 0.00 | 8.07 | 0.00 | lower |
 | Scene specificity (setting/light/composition/medium covered) | 16.7% | 56.5% | 83.3% | higher |
 | Model compatibility (no lint violations, length in band) | 27.9% | 82.0% | 100.0% | higher |
@@ -21,7 +21,7 @@ Context awareness (revision cases, n=5): intent preservation A 51.7%, B 51.7%, C
 | Group | n | Intent A/B/C | Additions A/B/C | Compat A/B/C |
 |---|---|---|---|---|
 | flux | 16 | 92/92/100 | 0.0/7.9/0.0 | 38/100/100 |
-| gemini | 41 | 83/83/100 | 0.0/8.1/0.0 | 17/80/100 |
+| gemini | 41 | 84/84/100 | 0.0/8.1/0.0 | 17/80/100 |
 | midjourney | 16 | 90/90/100 | 0.0/8.1/0.0 | 81/100/100 |
 | qwen-image | 8 | 94/94/100 | 0.0/8.1/0.0 | 0/38/100 |
 | sdxl | 9 | 94/94/100 | 0.0/7.9/0.0 | 33/100/100 |
@@ -55,7 +55,7 @@ Context awareness (revision cases, n=5): intent preservation A 51.7%, B 51.7%, C
 | multi_person | 3 | 100/100/100 | 0.0/8.0/0.0 | 33/100/100 |
 | oil_painting | 1 | 100/100/100 | 0.0/9.0/0.0 | 100/100/100 |
 | optimize | 4 | 88/88/100 | 0.0/5.0/0.0 | 75/100/100 |
-| people | 9 | 95/95/100 | 0.0/8.0/0.0 | 11/78/100 |
+| people | 9 | 100/100/100 | 0.0/8.0/0.0 | 11/78/100 |
 | product | 5 | 100/100/100 | 0.0/8.8/0.0 | 0/80/100 |
 | reference | 5 | 100/100/100 | 0.0/8.0/0.0 | 40/100/100 |
 | revision | 5 | 52/52/100 | 0.0/8.0/0.0 | 0/80/100 |

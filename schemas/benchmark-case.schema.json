@@ -92,6 +92,13 @@
     },
     "notes": {
       "type": "string"
+    },
+    "skill_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "regexes the C prompt must match for skill behaviour the user did not state (e.g. a person's moment, camera height); scored separately from intent preservation"
     }
   }
 }

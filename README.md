@@ -46,7 +46,7 @@ Not added: studio light, model looks, "cinematic", "8K". More in [`examples/`](e
 
 | Metric | A raw | B conventional | C Image Whisperer |
 |---|---|---|---|
-| Intent preservation | 89.2% | 89.5% | 100.0% |
+| Intent preservation | 89.6% | 89.9% | 100.0% |
 | Unrequested additions per prompt | 0.00 | 8.07 | 0.00 |
 | Scene specificity | 16.7% | 56.5% | 83.3% |
 | Model compatibility | 27.9% | 82.0% | 100.0% |

@@ -144,7 +144,7 @@ class Benchmark(unittest.TestCase):
 
     def test_skill_arm_has_no_regressions(self):
         rows = bench.run()
-        bad = [(r["id"], r["C"]) for r in rows if r["C"]["intent"] < 1 or r["C"]["assumptions"] or not r["C"]["compat"]]
+        bad = [(r["id"], r["C"]) for r in rows if r["C"]["intent"] < 1 or r["C"]["assumptions"] or not r["C"]["compat"] or r["C"]["skill_missing"]]
         self.assertEqual(bad, [])
 
     def test_report_is_current(self):
@@ -157,7 +157,8 @@ class Benchmark(unittest.TestCase):
                "He has short messy black hair, natural skin texture and a relaxed smile as he looks toward the camera. "
                "Shot at eye level on an iPhone's wide main camera with a slight casual tilt, off-centre framing.")
         r = bench.score(case, "C", old)
-        self.assertLess(r["intent"], 1.0)
+        self.assertEqual(r["intent"], 1.0)  # every user-stated detail is there
+        self.assertTrue(r["skill_missing"])  # but no moment, framing or camera height
         self.assertIn(r"\bordinary\b", r["added"])
 
     def test_lint_catches_known_errors(self):
